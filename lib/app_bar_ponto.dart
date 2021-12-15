@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
+import 'package:workspace_flutter/login.dart';
+import 'package:workspace_flutter/service/ServiceUtils.dart';
 
 class AppBarPonto extends StatefulWidget with PreferredSizeWidget {
   final String text;
@@ -22,10 +24,15 @@ class _AppBarPontoState extends State<AppBarPonto> {
       actions: [
         Container(
           margin: const EdgeInsets.only(right: 10),
-          child: const Icon(
-            FontAwesomeIcons.powerOff,
-            color: Colors.blue,
-            size: 20,
+          child: InkWell(
+            onTap: () {
+              sair();
+            },
+            child: const Icon(
+              FontAwesomeIcons.signOutAlt,
+              color: Colors.blue,
+              size: 20,
+            ),
           ),
         )
       ],
@@ -37,6 +44,20 @@ class _AppBarPontoState extends State<AppBarPonto> {
       ),
       elevation: 5,
       backgroundColor: Colors.white,
+    );
+  }
+
+  sair() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (BuildContext context) {
+          if (const Login().toString().contains('TelaLogin')) {
+            ServiceUtils.invalidateToken();
+          }
+          return const Login();
+        },
+      ),
     );
   }
 }

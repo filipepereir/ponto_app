@@ -1,25 +1,19 @@
 import 'dart:convert';
 
 import "package:http/http.dart" as http;
-import 'package:workspace_flutter/dto/registro_dto.dart';
-import 'package:workspace_flutter/dto/registro_ponto_dto.dart';
+import 'package:workspace_flutter/dto/RegistroPontoDTO.dart';
+import 'package:workspace_flutter/service/ServiceUtils.dart';
 
-class RegistroPontoService {
-  static Map<String, String> header = {'Content-Type': 'application/json'};
+class RegistroPontoService extends ServiceUtils {
   final String apiUrl = "localhost:8080";
   final String apiVersion = "/ponto";
 
   Future<RegistroPontoDTO> registrarPonto() async {
-    //Uri url = (buildUrl("registro"));
+    Uri url =
+        Uri.http('192.168.15.13:8080', '/ponto/registro', {'q': '{http}'});
 
-    Uri url = Uri.http('192.168.15.13:8080', '/ponto/registro', {'q': '{http}'});
-    RegistroDTO registro = RegistroDTO(codigo: 1, usuario: "Filipe Pereira");
+    final response = http.post(url, headers: ServiceUtils.headerJWT);
 
-    String jsonDTO = registro.toJson();
-
-    print(jsonDTO);
-
-    final response = http.post(url, headers: header, body: jsonDTO);
     RegistroPontoDTO retorno = RegistroPontoDTO();
     await response.then((res) {
       var data = json.decode(utf8.decode(res.bodyBytes));

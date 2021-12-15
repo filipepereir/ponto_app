@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:slide_digital_clock/slide_digital_clock.dart';
 import 'package:intl/intl.dart';
-import 'package:workspace_flutter/dto/registro_ponto_dto.dart';
+import 'package:workspace_flutter/dto/RegistroPontoDTO.dart';
 import 'package:workspace_flutter/service/RegistroPontoService.dart';
 
 class RegistrarPonto extends StatefulWidget {
