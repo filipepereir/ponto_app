@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:slide_digital_clock/slide_digital_clock.dart';
 import 'package:intl/intl.dart';
-import 'package:workspace_flutter/dto/RegistroPontoDTO.dart';
-import 'package:workspace_flutter/service/RegistroPontoService.dart';
+import 'package:workspace_flutter/dto/PontoRegistradoDTO.dart';
+import 'package:workspace_flutter/service/PontoService.dart';
 
 class RegistrarPonto extends StatefulWidget {
   const RegistrarPonto({Key? key}) : super(key: key);
@@ -91,8 +91,8 @@ class _RegistrarPontoState extends State<RegistrarPonto> {
   }
 
   registrarPonto() async {
-    var registro = RegistroPontoDTO();
-    RegistroPontoService service = RegistroPontoService();
+    var registro = PontoRegistradoDTO();
+    PontoService service = PontoService();
     service
         .registrarPonto()
         .then(

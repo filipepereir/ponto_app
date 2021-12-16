@@ -1,10 +1,10 @@
 import 'dart:convert' as convert;
 
-class RegistroDTO {
+class RegistrarPontoDTO {
   final int codigo;
   final String usuario;
 
-  RegistroDTO({required this.codigo, required this.usuario});
+  RegistrarPontoDTO({required this.codigo, required this.usuario});
 
   Map<String, dynamic> toMap() {
     final Map<String, dynamic> data = <String, dynamic>{};

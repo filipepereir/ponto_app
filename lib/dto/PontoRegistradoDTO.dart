@@ -1,12 +1,12 @@
-class RegistroPontoDTO {
+class PontoRegistradoDTO {
   late String dataHoraRegistro;
   late String dataBatida;
   late String status;
   late String mensagem;
 
-  RegistroPontoDTO();
+  PontoRegistradoDTO();
 
-  RegistroPontoDTO.fromJson(Map<String, dynamic> json) {
+  PontoRegistradoDTO.fromJson(Map<String, dynamic> json) {
     dataHoraRegistro = json['dataHoraRegistro'];
     dataBatida = json['dataBatida'];
     status = json['status'];

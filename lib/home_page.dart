@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:workspace_flutter/app_bar_ponto.dart';
 import 'package:workspace_flutter/dto/UsuarioDTO.dart';
 import 'package:workspace_flutter/registrar_ponto_page.dart';
+import 'package:workspace_flutter/registros_ponto_page.dart';
 import 'package:workspace_flutter/service/FuncionarioService.dart';
 import 'package:workspace_flutter/utils/loader.dart';
 
@@ -21,9 +22,7 @@ class _HomePageState extends State<HomePage> {
 
   static const List<Widget> _widgetOptions = <Widget>[
     RegistrarPonto(),
-    Text(
-      'Registros',
-    ),
+    Registros()
   ];
 
   void _onItemTapped(int index) {
