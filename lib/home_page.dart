@@ -18,6 +18,8 @@ class _HomePageState extends State<HomePage> {
   UsuarioDTO usuario = UsuarioDTO();
   int _selectedIndex = 0;
 
+  String nomeUsuario = "";
+
   final FuncionarioService funcionarioService = new FuncionarioService();
 
   static const List<Widget> _widgetOptions = <Widget>[
@@ -34,41 +36,40 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
+    funcionarioService.buscarFuncionarioLogado().then(
+          (value) => {
+            setState(
+              () {
+                usuario = value;
+                nomeUsuario = value.nome;
+              },
+            ),
+          },
+        );
   }
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<UsuarioDTO>(
-      future: funcionarioService.buscarFuncionarioLogado(),
-      builder: (context, snapshot) {
-        if (!snapshot.hasData) {
-          return Loader();
-        }
-        usuario = snapshot.data!;
-
-        return Scaffold(
-          appBar: AppBarPonto(usuario.nome),
-          body: body(context),
-          bottomNavigationBar: BottomNavigationBar(
-            items: const <BottomNavigationBarItem>[
-              BottomNavigationBarItem(
-                icon: Icon(FontAwesomeIcons.userClock),
-                label: 'Registrar',
-                backgroundColor: Colors.black12,
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(FontAwesomeIcons.clock),
-                label: 'Registros',
-                backgroundColor: Colors.black12,
-              ),
-            ],
-            currentIndex: _selectedIndex,
-            selectedItemColor: Colors.blue,
-            onTap: _onItemTapped,
-
+    return Scaffold(
+      appBar: AppBarPonto(nomeUsuario),
+      body: body(context),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(FontAwesomeIcons.userClock),
+            label: 'Registrar',
+            backgroundColor: Colors.black12,
           ),
-        );
-      },
+          BottomNavigationBarItem(
+            icon: Icon(FontAwesomeIcons.clock),
+            label: 'Registros',
+            backgroundColor: Colors.black12,
+          ),
+        ],
+        currentIndex: _selectedIndex,
+        selectedItemColor: Colors.blue,
+        onTap: _onItemTapped,
+      ),
     );
   }
 

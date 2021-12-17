@@ -49,12 +49,12 @@ class _RegistrosState extends State<Registros> {
         //color: Colors.red,
         child: GroupedListView<RegistrosDTO, String>(
           elements: registros,
-          groupBy: (element) => element.dataBatida,
+          groupBy: (element) => element.descricaoDia,
           groupComparator: (value1, value2) => value2.compareTo(value1),
           itemComparator: (item1, item2) =>
-              item1.nomeUsuario.compareTo(item2.nomeUsuario),
-          order: GroupedListOrder.ASC,
-          groupSeparatorBuilder: (String value) => Material(
+              item1.descricaoDia.compareTo(item2.descricaoDia),
+          order: GroupedListOrder.DESC,
+          groupSeparatorBuilder: (String element) => Material(
             elevation: 3,
             child: Container(
               color: Colors.white,
@@ -62,7 +62,7 @@ class _RegistrosState extends State<Registros> {
               padding: const EdgeInsets.all(10),
               margin: const EdgeInsets.all(0),
               child: Text(
-                value,
+                element,
                 style: const TextStyle(fontSize: 20, color: Color(0xFF707070)),
               ),
             ),
@@ -73,13 +73,13 @@ class _RegistrosState extends State<Registros> {
               children: [
                 Container(
                   //color: Colors.blueGrey[50],
-                  width: MediaQuery.of(context).size.width * 0.99,
+                  //width: MediaQuery.of(context).size.width * 0.99,
                   //padding: EdgeInsets.all(10),
                   padding: const EdgeInsets.only(
                       left: 20, bottom: 10, right: 20, top: 10),
                   margin: const EdgeInsets.all(0),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    //mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -104,6 +104,7 @@ class _RegistrosState extends State<Registros> {
                             ),
                           ),
                           FittedBox(
+                            fit: BoxFit.contain,
                             child: Text(
                               //widget.descricaoPapel,
                               element.mensagem,

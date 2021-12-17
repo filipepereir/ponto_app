@@ -6,6 +6,7 @@ class Loader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: MediaQuery.of(context).size.width * 0.98,
       color: Colors.white,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -13,7 +14,7 @@ class Loader extends StatelessWidget {
           //Text('Aguarde'),
           CircularProgressIndicator(
             strokeWidth: 10,
-            valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF003E51)),
+            valueColor: AlwaysStoppedAnimation<Color>(Colors.blue),
           ),
         ],
       ),
