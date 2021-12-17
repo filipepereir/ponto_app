@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import "package:http/http.dart" as http;
+import 'package:workspace_flutter/dto/LocalizacaoDTO.dart';
 import 'package:workspace_flutter/dto/PontoRegistradoDTO.dart';
 import 'package:workspace_flutter/dto/RegistrosDTO.dart';
 import 'package:workspace_flutter/service/ServiceUtils.dart';
@@ -9,11 +10,13 @@ class PontoService extends ServiceUtils {
   final String apiUrl = "localhost:8080";
   final String apiVersion = "/ponto";
 
-  Future<PontoRegistradoDTO> registrarPonto() async {
+  Future<PontoRegistradoDTO> registrarPonto(
+      LocalizacaoDTO localizacaoDTO) async {
     Uri url =
         Uri.http('192.168.15.13:8080', '/ponto/registro', {'q': '{http}'});
 
-    final response = http.post(url, headers: ServiceUtils.headerJWT);
+    final response = http.post(url,
+        headers: ServiceUtils.headerJWT, body: localizacaoDTO.toJson());
 
     PontoRegistradoDTO retorno = PontoRegistradoDTO();
     await response.then((res) {

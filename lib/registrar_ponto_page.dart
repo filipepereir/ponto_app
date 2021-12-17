@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:slide_digital_clock/slide_digital_clock.dart';
 import 'package:intl/intl.dart';
+import 'package:workspace_flutter/dto/LocalizacaoDTO.dart';
 import 'package:workspace_flutter/dto/PontoRegistradoDTO.dart';
 import 'package:workspace_flutter/service/PontoService.dart';
 
@@ -13,6 +15,10 @@ class RegistrarPonto extends StatefulWidget {
 }
 
 class _RegistrarPontoState extends State<RegistrarPonto> {
+  double lat = 0.0;
+  double long = 0.0;
+  String mensagem = "";
+
   String dataHoje = "";
   String diaHoje = "";
 
@@ -77,7 +83,7 @@ class _RegistrarPontoState extends State<RegistrarPonto> {
           Center(
             child: ElevatedButton(
               onPressed: () {
-                registrarPonto();
+                getLocalizacao();
               },
               child: const Text(
                 "Registrar",
@@ -90,11 +96,56 @@ class _RegistrarPontoState extends State<RegistrarPonto> {
     );
   }
 
-  registrarPonto() async {
+  getLocalizacao() async {
+    try {
+      Position posicao = await _posicaoAtual();
+      lat = posicao.latitude;
+      long = posicao.longitude;
+
+      print(lat);
+      print(long);
+
+      LocalizacaoDTO localizacaoDTO = LocalizacaoDTO();
+      localizacaoDTO.longitude = long;
+      localizacaoDTO.latitude = lat;
+
+      registrarPonto(localizacaoDTO);
+    } catch (e) {
+      dialog(e.toString(), "ERRO");
+      mensagem = e.toString();
+    }
+  }
+
+  Future<Position> _posicaoAtual() async {
+    LocationPermission permissao;
+
+    bool ativado = await Geolocator.isLocationServiceEnabled();
+
+    if (!ativado) {
+      return Future.error("Por favor habilite sua localização.");
+    }
+
+    permissao = await Geolocator.checkPermission();
+
+    if (permissao == LocationPermission.denied) {
+      permissao = await Geolocator.requestPermission();
+      if (permissao == LocationPermission.denied) {
+        return Future.error("Por favor autorize o acesso a sua localização.");
+      }
+    }
+
+    if (permissao == LocationPermission.deniedForever) {
+      return Future.error("Por favor autorize o acesso a sua localização.");
+    }
+
+    return await Geolocator.getCurrentPosition();
+  }
+
+  registrarPonto(localizacao) async {
     var registro = PontoRegistradoDTO();
     PontoService service = PontoService();
     service
-        .registrarPonto()
+        .registrarPonto(localizacao)
         .then(
           (value) => {
             registro = value,
