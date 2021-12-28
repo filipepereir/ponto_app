@@ -1,7 +1,11 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:grouped_list/grouped_list.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:workspace_flutter/service/PontoService.dart';
@@ -19,9 +23,15 @@ class Registros extends StatefulWidget {
 class _RegistrosState extends State<Registros> {
   List<RegistrosDTO> registros = [];
 
+  late GoogleMapController _mapsController;
+
   PontoService pontoService = PontoService();
 
   bool loader = false;
+
+  final markers = <Marker>{};
+
+  Map<MarkerId, Marker> markersId = <MarkerId, Marker>{};
 
   @override
   void initState() {
@@ -144,7 +154,8 @@ class _RegistrosState extends State<Registros> {
                         children: [
                           InkWell(
                             onTap: () {
-                              _localizacao("-15.7879", "-48.1198");
+                              _localizacao(element.latitude, element.longitude,
+                                  element.nomeUsuario);
                             },
                             child: const Icon(
                               FontAwesomeIcons.mapMarkerAlt,
@@ -168,16 +179,39 @@ class _RegistrosState extends State<Registros> {
     }
   }
 
-  _localizacao(lat, long) {
+  onMapCreated(GoogleMapController gmc) {
+    _mapsController = gmc;
+  }
+
+  _localizacao(lat, long, nomeUsuario) {
+    StreamSubscription<Position> positionStream;
+    LatLng _position = LatLng(lat, long);
+
+    markers.add(
+      Marker(
+        markerId: MarkerId(nomeUsuario),
+        position: LatLng(lat, long),
+      ),
+    );
+
     return showBarModalBottomSheet(
       context: context,
       isDismissible: true,
       builder: (context) => Container(
         height: MediaQuery.of(context).size.height * 0.97,
         child: Container(
-          margin: const EdgeInsets.all(20),
-          child: Text("Localiz ai bb, ${lat}  ${long}"),
-        ),
+            margin: const EdgeInsets.all(20),
+            child: GoogleMap(
+              mapType: MapType.normal,
+              zoomControlsEnabled: true,
+              markers: markers,
+              initialCameraPosition: CameraPosition(
+                target: _position,
+                zoom: 13,
+              ),
+              onMapCreated: onMapCreated,
+              myLocationEnabled: true,
+            )),
       ),
     );
   }

@@ -5,6 +5,8 @@ class RegistrosDTO {
   late String mensagem;
   late String nomeUsuario;
   late int codigoUsuario;
+  late double latitude;
+  late double longitude;
   late String descricaoDia;
 
   RegistrosDTO.fromJson(Map<String, dynamic> json) {
@@ -14,6 +16,8 @@ class RegistrosDTO {
     mensagem = json['mensagem'];
     nomeUsuario = json['nomeUsuario'];
     codigoUsuario = json['codigoUsuario'];
+    latitude = json['latitude'];
+    longitude = json['longitude'];
     descricaoDia = json['descricaoDia'];
   }
 }
