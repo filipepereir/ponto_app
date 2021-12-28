@@ -14,6 +14,16 @@ void main() {
         '/registrar': (_) => const RegistrarPonto(),
         '/registros': (_) => const Registros(),
       },
+      theme: ThemeData(
+        backgroundColor: Colors.black54,
+        primaryColor: const Color(0xFFe8ba16),
+        scaffoldBackgroundColor: Colors.white,
+        fontFamily: 'Roboto',
+        buttonTheme: ButtonThemeData(
+          buttonColor: Colors.blueAccent[700],
+          textTheme: ButtonTextTheme.primary,
+        ),
+      ),
     ),
   );
 }

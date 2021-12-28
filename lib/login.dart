@@ -60,7 +60,7 @@ class _LoginState extends State<Login> {
                 padding: const EdgeInsets.all(15),
                 //width: 400,
                 //height: 300,
-                margin: const EdgeInsets.only(left: 5, right: 5),
+                margin: const EdgeInsets.only(left: 5, right: 5, top: 10),
                 child: Column(
                   children: [
                     TextFormField(
@@ -121,7 +121,7 @@ class _LoginState extends State<Login> {
                                 style: TextStyle(
                                     fontSize: 18,
                                     color: Colors.white,
-                                    fontFamily: "Arial"),
+                                    fontFamily: "Roboto-Regular"),
                               ),
                               Container(
                                 margin:
@@ -150,6 +150,7 @@ class _LoginState extends State<Login> {
   }
 
   login(context) {
+    print("login");
     UsuarioLoginDTO usuario = UsuarioLoginDTO();
     usuario.email = tLogin.text;
     usuario.senha = tSenha.text;

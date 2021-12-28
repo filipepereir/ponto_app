@@ -38,8 +38,12 @@ class _AppBarPontoState extends State<AppBarPonto> {
       ],
       title: Center(
         child: Text(
-          widget.text,
-          style: const TextStyle(color: Colors.black, fontFamily: 'Arial'),
+          'Olá, ${widget.text}',
+          style: const TextStyle(
+            color: Colors.black,
+            fontFamily: 'Roboto',
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ),
       elevation: 5,

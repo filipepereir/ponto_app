@@ -50,95 +50,102 @@ class _RegistrarPontoState extends State<RegistrarPonto> {
     if (loader) {
       return Loader();
     } else {
-      return Container(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            DigitalClock(
-              secondDigitTextStyle: const TextStyle(
-                  fontFamily: 'Arial', fontSize: 35, color: Colors.blue),
-              digitAnimationStyle: Curves.decelerate,
-              is24HourTimeFormat: true,
-              areaDecoration: const BoxDecoration(
-                color: Colors.transparent,
-              ),
-              hourMinuteDigitTextStyle: const TextStyle(
-                color: Colors.black,
-                fontSize: 50,
-              ),
-              amPmDigitTextStyle: const TextStyle(
-                color: Colors.blueGrey,
-                fontWeight: FontWeight.bold,
-              ),
+      return Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          DigitalClock(
+            secondDigitTextStyle: const TextStyle(
+              fontFamily: 'Roboto',
+              fontSize: 35,
+              color: Colors.blue,
+              fontWeight: FontWeight.bold,
             ),
-            Text(
-              dataHoje,
-              style: const TextStyle(
-                color: Colors.black45,
-                fontFamily: 'Arial',
-                fontSize: 20,
-              ),
+            digitAnimationStyle: Curves.decelerate,
+            is24HourTimeFormat: true,
+            areaDecoration: const BoxDecoration(
+              color: Colors.transparent,
             ),
-            Text(
-              diasDaSemana[DateTime.now().weekday - 1],
-              style: const TextStyle(
-                color: Colors.black45,
-                fontFamily: 'Arial',
-                fontSize: 20,
-              ),
+            hourMinuteDigitTextStyle: const TextStyle(
+              color: Colors.black,
+              fontSize: 50,
+              fontFamily: 'Roboto',
+              fontWeight: FontWeight.bold,
             ),
-            const SizedBox(
-              height: 20,
+            amPmDigitTextStyle: const TextStyle(
+              color: Colors.blueGrey,
+              fontWeight: FontWeight.bold,
+              fontFamily: 'Roboto',
             ),
-            Center(
-              child: Container(
-                height: 45,
-                width: 140,
-                alignment: Alignment.center,
-                decoration: const BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                    stops: [0.3, 1],
-                    colors: [Colors.blue, Colors.blueGrey],
-                  ),
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(5),
-                  ),
+          ),
+          Text(
+            dataHoje,
+            style: const TextStyle(
+              color: Colors.black45,
+              fontFamily: 'Roboto',
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Text(
+            diasDaSemana[DateTime.now().weekday - 1],
+            style: const TextStyle(
+              color: Colors.black45,
+              fontFamily: 'Roboto',
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          Center(
+            child: Container(
+              height: 45,
+              width: 140,
+              alignment: Alignment.center,
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  stops: [0.3, 1],
+                  colors: [Colors.blue, Colors.blueGrey],
                 ),
-                child: SizedBox.expand(
-                  child: TextButton(
-                    onPressed: () {
-                      getLocalizacao();
-                    },
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Text(
-                          "Registrar",
-                          style: TextStyle(
-                              fontSize: 18,
-                              color: Colors.white,
-                              fontFamily: "Arial"),
-                        ),
-                        Container(
-                          margin: const EdgeInsets.only(left: 10, bottom: 5),
-                          child: const Icon(
-                            FontAwesomeIcons.clock,
+                borderRadius: BorderRadius.all(
+                  Radius.circular(5),
+                ),
+              ),
+              child: SizedBox.expand(
+                child: TextButton(
+                  onPressed: () {
+                    getLocalizacao();
+                  },
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text(
+                        "Registrar",
+                        style: TextStyle(
+                            fontSize: 18,
                             color: Colors.white,
-                            size: 18,
-                            semanticLabel:
-                                'Text to announce in accessibility modes',
-                          ),
+                            fontFamily: "Arial"),
+                      ),
+                      Container(
+                        margin: const EdgeInsets.only(left: 10, bottom: 5),
+                        child: const Icon(
+                          FontAwesomeIcons.clock,
+                          color: Colors.white,
+                          size: 18,
+                          semanticLabel:
+                              'Text to announce in accessibility modes',
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       );
     }
   }
@@ -231,17 +238,26 @@ class _RegistrarPontoState extends State<RegistrarPonto> {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
           ),
-          title: Text(status),
+          title: Text(
+            status,
+            style: const TextStyle(fontSize: 20, fontFamily: 'Roboto'),
+          ),
           content: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
-                Text(mensagem),
+                Text(
+                  mensagem,
+                  style: const TextStyle(fontFamily: 'Roboto', fontSize: 18),
+                ),
               ],
             ),
           ),
           actions: <Widget>[
             TextButton(
-              child: const Text('Ok'),
+              child: const Text(
+                'Aceitar',
+                style: TextStyle(fontFamily: 'Roboto', fontSize: 18),
+              ),
               onPressed: () {
                 Navigator.of(context).pop();
               },

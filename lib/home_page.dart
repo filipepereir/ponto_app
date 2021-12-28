@@ -20,7 +20,7 @@ class _HomePageState extends State<HomePage> {
 
   String nomeUsuario = "";
 
-  final FuncionarioService funcionarioService = new FuncionarioService();
+  final FuncionarioService funcionarioService = FuncionarioService();
 
   static const List<Widget> _widgetOptions = <Widget>[
     RegistrarPonto(),
@@ -54,6 +54,10 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBarPonto(nomeUsuario),
       body: body(context),
       bottomNavigationBar: BottomNavigationBar(
+        selectedLabelStyle:
+            const TextStyle(fontFamily: "Roboto", fontWeight: FontWeight.bold
+                //fontSize: 22,
+                ),
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(FontAwesomeIcons.userClock),
