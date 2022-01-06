@@ -7,7 +7,6 @@ import 'package:workspace_flutter/dto/RegistrosDTO.dart';
 import 'package:workspace_flutter/service/ServiceUtils.dart';
 
 class PontoService extends ServiceUtils {
-  final String apiUrl = "192.168.15.2:8080";
   final String apiVersion = "/ponto";
 
   Future<PontoRegistradoDTO> registrarPonto(

@@ -7,7 +7,7 @@ import 'ServiceUtils.dart';
 
 class FuncionarioService extends ServiceUtils {
   Future<UsuarioDTO> buscarFuncionarioLogado() {
-    Uri url = Uri.http('192.168.15.2:8080', '/ponto/funcionario', {'q': '{http}'});
+    Uri url = Uri.http(apiUrl, '/ponto/funcionario', {'q': '{http}'});
 
     final response = http.get(url, headers: ServiceUtils.headerJWT);
 

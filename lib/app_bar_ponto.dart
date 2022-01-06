@@ -6,9 +6,9 @@ import 'package:workspace_flutter/login.dart';
 import 'package:workspace_flutter/service/ServiceUtils.dart';
 
 class AppBarPonto extends StatefulWidget with PreferredSizeWidget {
-  final String text;
+  final String nomeUsuarioLogado;
 
-  const AppBarPonto(this.text);
+  const AppBarPonto(this.nomeUsuarioLogado);
 
   @override
   _AppBarPontoState createState() => _AppBarPontoState();
@@ -38,7 +38,7 @@ class _AppBarPontoState extends State<AppBarPonto> {
       ],
       title: Center(
         child: Text(
-          'Olá, ${widget.text}',
+          'Olá, ${widget.nomeUsuarioLogado}',
           style: const TextStyle(
             color: Colors.black,
             fontFamily: 'Roboto',

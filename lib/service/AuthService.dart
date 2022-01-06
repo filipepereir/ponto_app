@@ -11,7 +11,7 @@ class AuthService extends ServiceUtils {
   static Map<String, String> header = {'Content-Type': 'application/json'};
 
   Future<UsuarioLogadoDTO> login(UsuarioLoginDTO login) async {
-    Uri url = Uri.http('192.168.15.2:8080', '/ponto/auth', {'q': '{http}'});
+    Uri url = Uri.http(apiUrl, '/ponto/auth', {'q': '{http}'});
 
     final response = http.post(url, headers: header, body: login.toJson());
 

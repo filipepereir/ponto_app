@@ -37,11 +37,11 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     funcionarioService.buscarFuncionarioLogado().then(
-          (value) => {
+          (usuarioBuscado) => {
             setState(
               () {
-                usuario = value;
-                nomeUsuario = value.nome;
+                usuario = usuarioBuscado;
+                nomeUsuario = usuarioBuscado.nome;
               },
             ),
           },
